@@ -87,7 +87,11 @@ export default function ChatPage() {
               {m.role === "user" ? m.content : (
                 <div className="markdown-container">
                   <ReactMarkdown components={{
-                    code: ({node, inline, ...props}: any) => inline ? <code style={{ background: "rgba(0,0,0,0.3)", padding: "2px 4px", borderRadius: 4 }} {...props} /> : <pre style={{ background: "rgba(0,0,0,0.5)", padding: 12, borderRadius: 8, overflowX: "auto" }}><code {...props} /></pre>
+                    pre: ({node, ...props}: any) => <pre style={{ background: "rgba(0,0,0,0.5)", padding: 12, borderRadius: 8, overflowX: "auto", margin: "12px 0" }} {...props} />,
+                    code: ({node, className, ...props}: any) => {
+                      const isBlock = /language-(\w+)/.exec(className || '') || String(props.children).includes('\n');
+                      return isBlock ? <code className={className} {...props} /> : <code style={{ background: "rgba(0,0,0,0.3)", padding: "2px 4px", borderRadius: 4 }} className={className} {...props} />;
+                    }
                   }}>{m.content}</ReactMarkdown>
                 </div>
               )}

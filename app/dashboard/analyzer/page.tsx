@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { getSupabaseBrowserClient } from "@/lib/supabase";
 
 type HistoryItem = { 
   id: string; 
@@ -17,28 +18,38 @@ export default function AnalyzerPage() {
   const [loading, setLoading] = useState(false);
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [activeAnalysis, setActiveAnalysis] = useState<HistoryItem | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  const supabase = getSupabaseBrowserClient();
   
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem("analyzerHistory");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        setHistory(parsed);
-        if (parsed.length > 0) {
-          setActiveAnalysis(parsed[0]);
-          setDescription(parsed[0].description);
-        }
-      } catch (e) {}
-    }
-  }, []);
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) setUserId(data.user.id);
+    });
+  }, [supabase]);
 
   useEffect(() => {
-    if (history.length) {
-      localStorage.setItem("analyzerHistory", JSON.stringify(history));
+    if (userId) {
+      const saved = localStorage.getItem(`analyzerHistory_${userId}`);
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          setHistory(parsed);
+          if (parsed.length > 0) {
+            setActiveAnalysis(parsed[0]);
+            setDescription(parsed[0].description);
+          }
+        } catch (e) {}
+      }
     }
-  }, [history]);
+  }, [userId]);
+
+  useEffect(() => {
+    if (userId && history.length) {
+      localStorage.setItem(`analyzerHistory_${userId}`, JSON.stringify(history));
+    }
+  }, [history, userId]);
 
   async function handleAnalyze() {
     if (!description.trim()) return;

@@ -5,11 +5,10 @@ import Link from "next/link";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 
 const NAV_ITEMS = [
-  { href: "/dashboard/files", label: "Codebase Manager", icon: "📁" },
+
   { href: "/dashboard/analyzer", label: "Impact Analyzer", icon: "🕸️" },
   { href: "/dashboard/understanding", label: "Smart Code Explainer", icon: "🤖" },
   { href: "/dashboard/bugs", label: "Bug Detector", icon: "🐛" },
-  { href: "/dashboard/tests", label: "Auto Unit Tests", icon: "🧪" },
   { href: "/dashboard/chat", label: "Repo AI Chat", icon: "💬" },
 ];
 

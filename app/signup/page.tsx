@@ -46,7 +46,7 @@ export default function SignupPage() {
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <span style={{ fontSize: "2.5rem" }}>🎓</span>
           <h1 style={{ fontSize: "1.6rem", fontWeight: 700, marginTop: 12 }}>Create your account</h1>
-          <p style={{ color: "var(--text-secondary)", marginTop: 6, fontSize: "0.92rem" }}>Start studying smarter with AI</p>
+          <p style={{ color: "var(--text-secondary)", marginTop: 6, fontSize: "0.92rem" }}>Sign up to AI change impact analyzer</p>
         </div>
         <form onSubmit={handleSignup} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <div>
