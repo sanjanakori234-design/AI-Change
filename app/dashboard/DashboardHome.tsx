@@ -5,7 +5,7 @@ const FEATURES = [
 
   { href: "/dashboard/analyzer", icon: "🕸️", title: "Visual Impact Analyzer", desc: "Heatmaps and dependency graphs for safer code changes.", color: "rgba(124,58,237,0.2)" },
   { href: "/dashboard/understanding", icon: "🤖", title: "Code Understanding", desc: "Line-by-line explanation, bug detection, and refactoring.", color: "rgba(99,102,241,0.2)" },
-  { href: "/dashboard/tests", icon: "🧪", title: "Unit Test Generator", desc: "Instantly build regression safety nets for your functions.", color: "rgba(168,85,247,0.2)" },
+  { href: "/dashboard/bugs", icon: "🐛", title: "Bug Detector", desc: "Proactively scans patterns to detect anti-patterns and potential bugs.", color: "rgba(168,85,247,0.2)" },
   { href: "/dashboard/chat", icon: "💬", title: "Repository AI Chat", desc: "Interact directly with your uploaded context via embeddings.", color: "rgba(16,185,129,0.2)" },
 ];
 

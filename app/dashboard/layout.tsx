@@ -5,7 +5,7 @@ import Link from "next/link";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 
 const NAV_ITEMS = [
-
+  { href: "/dashboard", label: "Dashboard Home", icon: "🏠" },
   { href: "/dashboard/analyzer", label: "Impact Analyzer", icon: "🕸️" },
   { href: "/dashboard/understanding", label: "Smart Code Explainer", icon: "🤖" },
   { href: "/dashboard/bugs", label: "Bug Detector", icon: "🐛" },
@@ -46,14 +46,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         flexShrink: 0,
       }}>
         <div style={{ padding: "24px 20px", borderBottom: "1px solid var(--glass-border)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <Link href="/dashboard" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 10 }}>
             <span style={{ fontSize: "1.5rem" }}>⚙️</span>
             <span style={{ fontWeight: 700, fontSize: "1.05rem" }} className="gradient-text">Impact Analyzer</span>
-          </div>
+          </Link>
         </div>
         <nav style={{ flex: 1, padding: "16px 12px", display: "flex", flexDirection: "column", gap: 4 }}>
           {NAV_ITEMS.map(item => (
-            <Link key={item.href} href={item.href} className={`sidebar-link ${pathname === item.href || pathname === "/dashboard" ? "active" : ""}`}>
+            <Link key={item.href} href={item.href} className={`sidebar-link ${pathname === item.href ? "active" : ""}`}>
               <span style={{ fontSize: "1.15rem" }}>{item.icon}</span>
               {item.label}
             </Link>
